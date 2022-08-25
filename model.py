@@ -8,12 +8,14 @@ torch.manual_seed(42)
 class Discriminator(nn.Module):
     def __init__(self):
         super(Discriminator, self).__init__()
+        # 1) DIMENSIONS CAN BE CHANGED TO GET DIFFERENT RESULTS (be careful that an output of a layer might be an input to other, so dimensions have to match accor. matrix multp)
         self.conv1 = nn.Conv2d(1, 16, (3,3), 2)
         self.conv2 = nn.Conv2d(16, 32, (5,5), 2)
         self.conv3 = nn.Conv2d(32, 64, (5,5), 2)
         self.bn1 = nn.BatchNorm2d(16)
         self.bn2 = nn.BatchNorm2d(32)
         self.bn3 = nn.BatchNorm2d(64)
+        # 2) SLOPE FOR LeakyReLU MIGHT BE CHANGED (default is 0.01)
         self.leakyrelu = nn.LeakyReLU(0.2)
         self.flatten = nn.Flatten()
         self.fc1 = nn.Linear(in_features=64,out_features = 1)
@@ -36,6 +38,7 @@ class Discriminator(nn.Module):
 class Generator(nn.Module):
     def __init__(self):
         super(Generator, self).__init__()
+        # 3) DIMENSIONS CAN BE CHANGED TO GET DIFFERENT RESULTS (be careful that an output of a layer might be an input to other, so dimensions have to match accor. matrix multp)
         self.deconv1 = nn.ConvTranspose2d(64, 256, (3,3), 2)
         self.deconv2 = nn.ConvTranspose2d(256, 128, (4,4), 1)
         self.deconv3 = nn.ConvTranspose2d(128, 64, (3,3), 2)
@@ -43,6 +46,7 @@ class Generator(nn.Module):
         self.bn1 = nn.BatchNorm2d(256)
         self.bn2 = nn.BatchNorm2d(128)
         self.bn3 = nn.BatchNorm2d(64)
+        # 4) SLOPE FOR LeakyReLU MIGHT BE CHANGED (default is 0.01)
         self.relu = nn.ReLU()
         self.tanh = nn.Tanh()
     def forward(self, x):
@@ -73,6 +77,7 @@ def generator_loss(pred):
     total_loss = loss(pred, gt)
     return total_loss
 
+# 5) PARAMETERS FOR THE FOLLOWING METHODS MIGHT BE CHANGED
 def discriminator_optimizer(params, lr=0.001):
     return optim.Adam(params, lr=lr, betas=(0.5, 0.99))
 
