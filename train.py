@@ -7,18 +7,8 @@ from torchvision.utils import make_grid
 import matplotlib.pyplot as plt 
 
 #import generator and discriminator and loss functions from model.py
-#train augmentation
-"""train_transform = transforms.Compose([
-    transforms.RandomCrop(32, padding=4),
-    transforms.RandomHorizontalFlip(),
-    transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-])
-transforms.RandomCrop(28, padding=4),
-        transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
-        transforms.Normalize((0.5,), (0.5,))
-"""
+from model import Generator, Discriminator, discriminator_loss, generator_loss, discriminator_optimizer, generator_optimizer, weights_init
+
 def visualize_images(tensor, i,no = 16, size=(1, 28, 28)):
     img = tensor.detach().cpu()
     grid = make_grid(img[:no], 4)
@@ -37,6 +27,19 @@ train_set = datasets.FashionMNIST(
         transforms.ToTensor()
     ])
 )
+# 1) FOLLOWING IS AN EXAMPLE FOR DIFFERENT AUGMENTATION, CHANGING THEM MIGHT RESULTS IN BETTER TRAINING
+# example: train augmentation
+"""train_transform = transforms.Compose([
+    transforms.RandomCrop(32, padding=4),
+    transforms.RandomHorizontalFlip(),
+    transforms.ToTensor(),
+    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+])
+transforms.RandomCrop(28, padding=4),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize((0.5,), (0.5,))
+"""
 
 #load dataset into batches
 train_loader = torch.utils.data.DataLoader(
