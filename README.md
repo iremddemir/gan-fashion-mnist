@@ -1,11 +1,22 @@
 # Basic GAN Project on Fashion-Mnist
-This project contains basic implementation of a Generative Adversarial Network on pytorch. It is written to understand code side of GANs.
+This project contains basic implementation of a Generative Adversarial Network on pytorch. It is written to understand how to code GANs.
 
 ## Usage
--- TODO: how to run code
+You can just run the train.py file without any changes needed. 
+For experimenting & see the changes, some places that can be changed are commented.
+
 
 ## Train results
--- TODO: add train results 
+
+| Epoch-0    | Epoch-5   | 
+|------------|-------------| 
+| <img src="/results/epoch-0.png" width="250" alt="Epoch-0">     | <img src="/results/epoch-5.png" width="250">     | 
+
+| Epoch-10    | Epoch-15   | 
+|------------|-------------| 
+| <img src="/results/epoch-10.png" width="250"> | <img src="/results/epoch-15.png" width="250"> |
+
+
 
 ## GAN
 A GAN has 2 parts:
